@@ -7,14 +7,14 @@ use Yii;
 /**
  * This is the model class for table "tag".
  *
- * @property int $id
+ * @property integer $id
  * @property string $name
- * @property int|null $frequency
+ * @property integer $frequency
  */
 class Tag extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -22,7 +22,7 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -34,7 +34,7 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {
@@ -44,4 +44,81 @@ class Tag extends \yii\db\ActiveRecord
             'frequency' => 'Frequency',
         ];
     }
+    
+    //在 PHP 8.1 及更高版本中，向 trim() 函数传递 null 已被弃用。
+    public static function string2array($tags)
+    {
+        if ($tags === null) {
+            return [];
+        }
+    
+        $trimmedTags = trim($tags);
+    
+        return preg_split('/\s*,\s*/', $trimmedTags, -1, PREG_SPLIT_NO_EMPTY);
+    }
+    
+    public static  function array2string($tags)
+    {
+    	return implode(', ',$tags);
+    }
+    
+    public static function addTags($tags)
+    {
+    	if(empty($tags)) return ;
+    	
+    	foreach ($tags as $name)
+    	{
+    		$aTag = Tag::find()->where(['name'=>$name])->one();
+    		$aTagCount = Tag::find()->where(['name'=>$name])->count();
+    		
+    		if(!$aTagCount)
+    		{
+    			$tag = new Tag;
+    			$tag->name = $name;
+    			$tag->frequency = 1;
+    			$tag->save();
+    		}
+    		else 
+    		{
+    			$aTag->frequency += 1;
+    			$aTag->save();
+    		}
+    	}
+    }
+    
+    public static function removeTags($tags)
+    {
+    	if(empty($tags)) return ;
+    	
+    	foreach($tags as $name)
+    	{
+    		$aTag = Tag::find()->where(['name'=>$name])->one();
+    		$aTagCount = Tag::find()->where(['name'=>$name])->count();
+    		
+    		if($aTagCount)
+    		{
+    			if($aTagCount && $aTag->frequency<=1)
+    			{
+    				$aTag->delete();
+    			}
+    			else 
+    			{
+    				$aTag->frequency -= 1;
+    				$aTag->save();
+    			}
+    		}
+    	}
+    }
+    
+    public static function updateFrequency($oldTags,$newTags)
+    {
+    	if(!empty($oldTags) || !empty($newTags))
+    	{
+    		$oldTagsArray = self::string2array($oldTags);
+    		$newTagsArray = self::string2array($newTags);
+    		
+    		self::addTags(array_values(array_diff($newTagsArray,$oldTagsArray)));
+    		self::removeTags(array_values(array_diff($oldTagsArray,$newTagsArray)));
+    	}
+    }    
 }

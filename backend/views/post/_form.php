@@ -1,10 +1,13 @@
-<?php
+ <?php
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\Poststatus;
+use common\models\Adminuser;
 
 /** @var yii\web\View $this */
 /** @var common\models\Post $model */
+/** @var common\models\Poststatus $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -18,16 +21,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'tags')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'create_time')->textInput() ?>
-
-    <?= $form->field($model, 'update_time')->textInput() ?>
-
-    <?= $form->field($model, 'author_id')->textInput() ?>
+    <?= $form->field($model,'status')
+         ->dropDownList(Poststatus::find()
+						->select(['name','id'])
+						->orderBy('position')
+						->indexBy('id')
+						->column(),
+    		   ['prompt'=>'请选择状态']);?>
+     		   
+        <?= $form->field($model,'author_id')
+         ->dropDownList(Adminuser::find()
+						->select(['nickname','id'])
+						->indexBy('id')
+						->column(),
+    		   ['prompt'=>'请选择作者']);?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('提交', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
