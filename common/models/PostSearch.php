@@ -73,7 +73,7 @@ class PostSearch extends Post
         // 需指明为post.id
         $query->andFilterWhere([
             'post.id' => $this->id,
-            'status' => $this->status,
+            'post.status' => $this->status,
             'create_time' => $this->create_time,
             'update_time' => $this->update_time,
             'author_id' => $this->author_id,

@@ -58,8 +58,8 @@ class CommentSearch extends Comment
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'status' => $this->status,
+            'comment.id' => $this->id,
+            'comment.status' => $this->status,
             'create_time' => $this->create_time,
             'userid' => $this->userid,
             'post_id' => $this->post_id,
@@ -68,6 +68,21 @@ class CommentSearch extends Comment
         $query->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'url', $this->url]);
+
+        $query->join('INNER JOIN','user','comment.userid = user.id');
+        $query->andFilterWhere(['like','user.username',$this->getAttribute('user.username')]);
+        
+        $dataProvider->sort->attributes['user.username'] =
+        [
+        		'asc'=>['user.username'=>SORT_ASC],
+        		'desc'=>['user.username'=>SORT_DESC],
+        ];
+        
+        $dataProvider->sort->defaultOrder = 
+        [
+        		'status'=>SORT_ASC,
+        		'id'=>SORT_DESC,
+        ];
 
         return $dataProvider;
     }
