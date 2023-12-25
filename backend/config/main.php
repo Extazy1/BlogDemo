@@ -17,8 +17,9 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+        // 后台认证从Adminuser中匹配
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\models\Adminuser',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
