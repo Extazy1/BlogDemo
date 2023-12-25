@@ -56,9 +56,55 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['email'], 'unique'],
+        	[['email'], 'required'],
+        	[['email'], 'email'],
         ];
     }
 
+    public function attributeLabels()
+    {
+    	return [
+    			'id' => 'ID',
+    			'username' => '用户名',
+    			'auth_key' => 'Auth Key',
+    			'password_hash' => 'Password Hash',
+    			'password_reset_token' => 'Password Reset Token',
+    			'email' => 'Email',
+    			'status' => '状态',
+    			'created_at' => '创建时间',
+    			'updated_at' => '修改时间',
+    	];
+    }
+
+    public function getComments()
+    {       
+        return $this->hasMany(Comment::class, ['userid' => 'id']);
+    }
+
+    public static function allStatus()
+    {
+        return [
+            self::STATUS_ACTIVE   => '正常',
+            self::STATUS_INACTIVE => '未激活',
+            self::STATUS_DELETED  => '已删除',
+        ];
+    }
+    
+    public function getStatusStr()
+    {
+        switch ($this->status) {
+            case self::STATUS_ACTIVE:
+                return '正常';
+            case self::STATUS_INACTIVE:
+                return '未激活';
+            case self::STATUS_DELETED:
+                return '已删除';
+            default:
+                return '未知状态';
+        }
+    }
+    
     /**
      * {@inheritdoc}
      */

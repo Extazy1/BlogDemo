@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use common\models\Adminuser;
 use common\models\AdminuserSearch;
+use backend\models\SignupForm;
+use backend\models\ResetpwdForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,23 +63,50 @@ class AdminuserController extends Controller
     }
 
     /**
-     * Creates a new Adminuser model.
+     * Creates a new SignupForm model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Adminuser();
+        $model = new SignupForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $user = $model->signup();
+                if ($user) {
+                    return $this->redirect(['view', 'id' => $user->id]);
+                } else {
+                    
+                }
             }
-        } else {
-            $model->loadDefaultValues();
         }
+        
 
         return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+        /**
+     * Creates a new ResetpwdForm model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return string|\yii\web\Response
+     */
+    public function actionResetpwd($id)
+    {
+        $model = new ResetpwdForm();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {              
+                if ($model->resetPassword($id)) {
+                    return $this->redirect(['index']);
+                } 
+            }
+        }
+        
+
+        return $this->render('resetpwd', [
             'model' => $model,
         ]);
     }

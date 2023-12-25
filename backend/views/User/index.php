@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var common\models\UserSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Users';
+$this->title = '用户管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -27,24 +27,33 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+           // ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            //'email:email',
-            //'status',
-            //'created_at',
-            //'updated_at',
-            //'verification_token',
+            //'auth_key',
+            //'password_hash',
+            //'password_reset_token',
+             'email:email',
+            // 'status',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, User $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+            	'attribute'=>'status',
+            	'value'=>'statusStr',
             ],
+            // 'created_at',
+            [
+            	'attribute'=>'created_at',
+            	'format'=>['date','php:Y-m-d H:i:s'],
+            ],
+            // 'updated_at',
+        	[
+        		'attribute'=>'updated_at',
+        		'format'=>['date','php:Y-m-d H:i:s'],
+        	],
+        		
+            ['class' => 'yii\grid\ActionColumn',
+            	'template'=>'{update}'
+            ],	
         ],
     ]); ?>
 
