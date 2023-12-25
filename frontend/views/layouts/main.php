@@ -11,6 +11,7 @@ use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
 AppAsset::register($this);
+frontend\assets\BootstrapIconsAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -35,12 +36,12 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        
+        ['label' => '关于我们', 'url' => ['/site/about']],
+        ['label' => '联系我们', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => '注册', 'url' => ['/site/signup']];
     }
 
     echo Nav::widget([
@@ -48,11 +49,11 @@ AppAsset::register($this);
         'items' => $menuItems,
     ]);
     if (Yii::$app->user->isGuest) {
-        echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
+        echo Html::tag('div',Html::a('登录',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
     } else {
         echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                '退出 (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout text-decoration-none']
             )
             . Html::endForm();

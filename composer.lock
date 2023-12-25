@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2158b2fbf2c2f964ea5d76c3986297c9",
+    "content-hash": "605ff3936049850288fcde0482447745",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1464,6 +1464,51 @@
                 }
             ],
             "time": "2023-05-23T14:45:45+00:00"
+        },
+        {
+            "name": "twbs/bootstrap-icons",
+            "version": "v1.11.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/icons.git",
+                "reference": "108565f11f099f177b31929e3eafc2c8d497fcd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/icons/zipball/108565f11f099f177b31929e3eafc2c8d497fcd1",
+                "reference": "108565f11f099f177b31929e3eafc2c8d497fcd1",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "Official open source SVG icon library for Bootstrap",
+            "homepage": "https://icons.getbootstrap.com/",
+            "keywords": [
+                "bootstrap",
+                "icon font",
+                "icons",
+                "svg"
+            ],
+            "support": {
+                "issues": "https://github.com/twbs/icons/issues",
+                "source": "https://github.com/twbs/icons/tree/v1.11.2"
+            },
+            "time": "2023-11-21T20:06:00+00:00"
         },
         {
             "name": "yiisoft/yii2",

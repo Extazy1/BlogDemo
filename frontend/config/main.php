@@ -1,4 +1,4 @@
-<?php
+ <?php
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -11,10 +11,21 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'post/index',
+    'language' => 'zh-CN',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
+        'assetManager' => [
+            'bundles' => [
+                'frontend\assets\BootstrapIconsAsset' => [
+                    'class' => 'frontend\assets\BootstrapIconsAsset',
+                ],
+                // ... 其他的资源包
+            ],
+        ],
+        // ... 其他的组件配置
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
