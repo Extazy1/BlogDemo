@@ -18,106 +18,79 @@ use yii\widgets\ListView;
 ?>
 <div class="container">
 
-	<div class="row">
-	
-		<div class="col-md-9">
-		
-		<ol class="breadcrumb">
-        <li><a href="<?= Yii::$app->homeUrl;?>">首页</a> / </li>
-        <li>文章列表</li>
-		
-		</ol>
-		
+<div class="row">
+
+	<div class="col-md-9">
+
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="<?= Yii::$app->homeUrl;?>" class="text-decoration-none">首页</a></li>
+				<li class="breadcrumb-item active" aria-current="page">文章列表</li>
+			</ol>
+		</nav>
+
 		<?= ListView::widget([
-				'id'=>'postList',
-				'dataProvider'=>$dataProvider,
-				'itemView'=>'_listitem',//子视图,显示一篇文章的标题等内容.
-				'layout'=>'{items} {pager}',
-				'pager'=>[
-						'maxButtonCount'=>10,
-						'nextPageLabel'=>Yii::t('app','下一页'),
-						'prevPageLabel'=>Yii::t('app','上一页'),
-		],
-		])?>
-		
-		</div>
+    	'id' => 'postList',
+    	'dataProvider' => $dataProvider,
+    'itemView' => '_listitem', //子视图，显示一篇文章的标题等内容。
+    'layout' => '{items} <nav aria-label="Page navigation">{pager}</nav>',
+    'pager' => [
+        'maxButtonCount' => 10,
+        'linkContainerOptions' => ['class' => 'page-item'], // Bootstrap 5 分页项容器类
+        'linkOptions' => ['class' => 'page-link'], // Bootstrap 5 分页链接类
+        'disabledListItemSubTagOptions' => ['tag' => 'a', 'class' => 'page-link', 'aria-disabled' => 'true'], // Bootstrap 5 禁用分页项
+        'nextPageLabel' => Yii::t('app', '下一页'),
+        'prevPageLabel' => Yii::t('app', '上一页'),
+        'nextPageCssClass' => 'page-item', // Bootstrap 5 下一页项类
+        'prevPageCssClass' => 'page-item', // Bootstrap 5 上一页项类
+        'disableCurrentPageButton' => true, // 根据需要禁用当前页按钮
+    ],
+]) ?>
 
-		
-		<div class="col-md-3">
-			<div class="searchbox">
-				<ul class="list-group">
-				  <li class="list-group-item">
 
-                 查找文章
-				  <?php 
-				  //数据缓存示例代码
-				  /*
-				  $data = Yii::$app->cache->get('postCount');
-				  $dependency = new DbDependency(['sql'=>'select count(id) from post']);
-				  
-				  if ($data === false)
-				  {
-				  	$data = Post::find()->count();  sleep(5);
-				  	Yii::$app->cache->set('postCount',$data,600,$dependency); //设置缓存60秒后过期
-				  }
-				  
-				  echo $data;
-				  */
-				  ?>
-				  <?= Post::find()->count();?>
-				
-				  </li>
-				  <li class="list-group-item">				  
-					  <form class="form-inline" action="<?= Yii::$app->urlManager->createUrl(['post/index']);?>" id="w0" method="get">
-						  <div class="form-group">
-						    <input type="text" class="form-control" name="PostSearch[title]" id="w0input" placeholder="按标题">
-						  </div>
-						  <button type="submit" class="btn btn-outline-secondary">搜索</button>
-					</form>
-				  
-				  </li>
-				</ul>			
-			</div>
-			
-			<div class="tagcloudbox">
-				<ul class="list-group">
-				  <li class="list-group-item">
-				  <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> 标签云
-				  </li>
-				  <li class="list-group-item">
-				  <?php 
-				  //片段缓存示例代码
-				  /*
-				  $dependency = new DbDependency(['sql'=>'select count(id) from post']);
-				  
-				  if ($this->beginCache('cache',['duration'=>600],['dependency'=>$dependency]))
-				  {
-				  	echo TagsCloudWidget::widget(['tags'=>$tags]);
-				  	$this->endCache();
-				  }
-				  */
-				  ?>
-				  <?= TagsCloudWidget::widget(['tags'=>$tags]);?>
-				   </li>
-				</ul>			
-			</div>
-			
-			
-			<div class="commentbox">
-				<ul class="list-group">
-				  <li class="list-group-item">
-				  <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 最新回复
-				  </li>
-				  <li class="list-group-item">
-				  <?= RctReplyWidget::widget(['recentComments'=>$recentComments])?>
-				  </li>
-				</ul>			
-			</div>
-			
-		
-		</div>
-		
-		
 	</div>
+
+	<div class="col-md-3">
+
+		<div class="searchbox">
+			<ul class="list-group">
+				<li class="list-group-item">
+					查找文章 (<?= Post::find()->count(); ?>)
+				</li>
+				<li class="list-group-item">
+					<form class="d-flex" action="<?= Yii::$app->urlManager->createUrl(['post/index']); ?>" method="get">
+						<input type="text" class="form-control me-2" name="PostSearch[title]" placeholder="按标题">
+						<button type="submit" class="btn btn-outline-secondary">搜索</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+
+		<div class="tagcloudbox">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <i class="bi bi-tags-fill"></i> 标签云
+                    </li>
+                    <li class="list-group-item">
+                        <?php ?>
+                        <?= TagsCloudWidget::widget(['tags' => $tags]); ?>
+                    </li>
+                </ul>
+            </div>
+
+		<div class="commentbox">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<i class="bi bi-chat-left-text-fill"></i> 最新回复
+				</li>
+				<li class="list-group-item">
+					<?= RctReplyWidget::widget(['recentComments' => $recentComments]) ?>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+</div>
 
 </div>
