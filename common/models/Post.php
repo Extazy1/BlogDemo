@@ -16,7 +16,8 @@ use yii\helpers\Html;
  * @property int|null $create_time
  * @property int|null $update_time
  * @property int $author_id
- *
+ * @property int $remind 0:未提醒;1:已提醒 
+ * 
  * @property Adminuser $author
  * @property Comment[] $comments
  * @property Poststatus $status0
@@ -41,7 +42,7 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['title', 'content', 'status', 'author_id'], 'required'],
             [['content', 'tags'], 'string'],
-            [['status', 'create_time', 'update_time', 'author_id'], 'integer'],
+            [['status', 'create_time', 'userid', 'post_id', 'remind'], 'integer'],
             [['title'], 'string', 'max' => 128],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::class, 'targetAttribute' => ['author_id' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Poststatus::class, 'targetAttribute' => ['status' => 'id']],
@@ -62,6 +63,7 @@ class Post extends \yii\db\ActiveRecord
             'create_time' => '创建时间',
             'update_time' => '修改时间',
             'author_id' => '作者',
+            'remind' => '是否提醒',
         ];
     }
 

@@ -64,15 +64,15 @@ use yii\widgets\ListView;
                 
                 <?php if($added) {?>
                 <br>
-                <div class="alert alert-warning alert-dismissible" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  
-                  <h4>谢谢您的回复，我们会尽快审核后发布出来！</h4>
-                  
-                  <p><?= nl2br($commentModel->content);?></p>
-                  	<i class="bi bi-clock" aria-hidden="true"></i><em><?= date('Y-m-d H:i:s',$model->create_time)."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";?></em>
-                    <i class="bi bi-person-fill" aria-hidden="true"></i><em><?= Html::encode($model->author->nickname);?></em>	  
-                </div>			
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  
+  <h4>谢谢您的回复，我们会尽快审核后发布出来！</h4>
+  
+  <p><?= nl2br($commentModel->content);?></p>
+  	<i class="bi bi-clock" aria-hidden="true"></i><em><?= date('Y-m-d H:i:s',$model->create_time)."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";?></em>
+    <i class="bi bi-person-fill" aria-hidden="true"></i><em><?= Html::encode($model->author->nickname);?></em>	  
+</div>		
                 <?php }?>
 
                 <?php if($model->commentCount>=1) :?>
