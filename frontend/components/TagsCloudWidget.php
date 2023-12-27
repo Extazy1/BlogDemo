@@ -26,7 +26,7 @@ class TagsCloudWidget extends Widget
         
         foreach ($this->tags as $tag => $weight)
         {
-            $url = Yii::$app->urlManager->createUrl(['post/index','PostSearch[tags]' => $tag]);
+            $url = Yii::$app->urlManager->createUrl(['post/index','PostSearch[tags]'=>$tag]);
             $tagString .= '<a href="' . $url . '">' .
                 ' <h' . $weight . ' style="display: inline-block;"><span class="badge bg-'
                 . $fontStyle[$weight] . '">' . $tag . '</span></h' . $weight . '></a>';
