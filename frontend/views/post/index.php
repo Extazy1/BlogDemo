@@ -15,6 +15,7 @@ use yii\widgets\ListView;
 /** @var common\models\PostSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
+$this->title = '文章列表';
 ?>
 <div class="container">
 
@@ -30,22 +31,22 @@ use yii\widgets\ListView;
 		</nav>
 
 		<?= ListView::widget([
-    	'id' => 'postList',
-    	'dataProvider' => $dataProvider,
-    'itemView' => '_listitem', //子视图，显示一篇文章的标题等内容。
-    'layout' => '{items} <nav aria-label="Page navigation">{pager}</nav>',
-    'pager' => [
-        'maxButtonCount' => 10,
-        'linkContainerOptions' => ['class' => 'page-item'], // Bootstrap 5 分页项容器类
-        'linkOptions' => ['class' => 'page-link'], // Bootstrap 5 分页链接类
-        'disabledListItemSubTagOptions' => ['tag' => 'a', 'class' => 'page-link', 'aria-disabled' => 'true'], // Bootstrap 5 禁用分页项
-        'nextPageLabel' => Yii::t('app', '下一页'),
-        'prevPageLabel' => Yii::t('app', '上一页'),
-        'nextPageCssClass' => 'page-item', // Bootstrap 5 下一页项类
-        'prevPageCssClass' => 'page-item', // Bootstrap 5 上一页项类
-        'disableCurrentPageButton' => true, // 根据需要禁用当前页按钮
-    ],
-]) ?>
+			'id' => 'postList',
+			'dataProvider' => $dataProvider,
+			'itemView' => '_listitem', //子视图，显示一篇文章的标题等内容。
+			'layout' => '{items} <nav aria-label="Page navigation">{pager}</nav>',
+			'pager' => [
+				'maxButtonCount' => 10,
+				'linkContainerOptions' => ['class' => 'page-item'], // Bootstrap 5 分页项容器类
+				'linkOptions' => ['class' => 'page-link'], // Bootstrap 5 分页链接类
+				'disabledListItemSubTagOptions' => ['tag' => 'a', 'class' => 'page-link', 'aria-disabled' => 'true'], // Bootstrap 5 禁用分页项
+				'nextPageLabel' => Yii::t('app', '下一页'),
+				'prevPageLabel' => Yii::t('app', '上一页'),
+				'nextPageCssClass' => 'page-item', // Bootstrap 5 下一页项类
+				'prevPageCssClass' => 'page-item', // Bootstrap 5 上一页项类
+				'disableCurrentPageButton' => true, // 根据需要禁用当前页按钮
+			],
+		]) ?>
 
 
 	</div>
@@ -67,16 +68,16 @@ use yii\widgets\ListView;
 		</div>
 
 		<div class="tagcloudbox">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <i class="bi bi-tags-fill"></i> 标签云
-                    </li>
-                    <li class="list-group-item">
-                        <?php ?>
-                        <?= TagsCloudWidget::widget(['tags' => $tags]); ?>
-                    </li>
-                </ul>
-            </div>
+			<ul class="list-group">
+				<li class="list-group-item">
+					<i class="bi bi-tags-fill"></i> 标签云
+				</li>
+				<li class="list-group-item">
+					<?php ?>
+					<?= TagsCloudWidget::widget(['tags' => $tags]); ?>
+				</li>
+			</ul>
+		</div>
 
 		<div class="commentbox">
 			<ul class="list-group">

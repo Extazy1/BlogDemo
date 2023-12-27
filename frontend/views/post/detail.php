@@ -18,6 +18,7 @@ use yii\widgets\ListView;
 /** @var common\models\PostSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
+$this->title = $model->title;
 ?>
 <div class="container">
     <div class="row">
