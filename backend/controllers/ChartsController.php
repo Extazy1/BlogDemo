@@ -32,6 +32,12 @@ class ChartsController extends Controller
     {
         return $this->render('index');
     }
+
+    //显示样例
+    public function actionDashboard()
+    {
+        return $this->render('dashboard');
+    }
     
     //显示特定图表
     public function actionView()

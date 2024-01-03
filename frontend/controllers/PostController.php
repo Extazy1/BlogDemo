@@ -199,6 +199,7 @@ class PostController extends Controller
     	$tags=Tag::findTagWeights();
     	$recentComments=Comment::findRecentComments();
     	
+        //如果用户未登录这里会报错
     	$userMe = User::findOne(Yii::$app->user->id);
     	$commentModel = new Comment();
     	$commentModel->email = $userMe->email;
