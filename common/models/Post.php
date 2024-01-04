@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\helpers\Html;
+use yii\helpers\HtmlPurifier;
 
 /**
  * This is the model class for table "post".
@@ -141,6 +142,16 @@ class Post extends \yii\db\ActiveRecord
     	return $tmpStr.($tmpLen>$length?'...':'');
     }
     
+    /**
+     * 返回清洁后的内容
+     *
+     * @return string
+     */
+    public function getCleanContent()
+    {
+        return HtmlPurifier::process($this->content);
+    }
+
     public function  getTagLinks()
     {
     	$links=array();

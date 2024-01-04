@@ -45,7 +45,9 @@ $this->title = $model->title;
             </div>
 
             <div class="content">
-                <?php echo $model->content;?>
+                <?php 
+                    echo  htmlspecialchars_decode($model->content);
+                ?>
             </div> 
 
             <br>

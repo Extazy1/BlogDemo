@@ -18,3 +18,8 @@
     line-height: 2rem;
     border-radius: 0.25rem;
 }
+
+/* 主内容区域的CSS调整，以确保与侧边栏标题对齐 */
+main {
+    padding-top: calc(4rem + 1.5rem); /* 根据侧边栏标题的高度计算顶部内边距 */
+}
