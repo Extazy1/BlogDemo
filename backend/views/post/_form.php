@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Poststatus;
 use common\models\Adminuser;
+use dosamigos\ckeditor\CKEditor;
 
 /** @var yii\web\View $this */
 /** @var common\models\Post $model */
@@ -17,7 +18,10 @@ use common\models\Adminuser;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content')->widget(CKEditor::className(), [
+    'options' => ['rows' => 6],
+    'preset' => 'basic'
+    ]) ?>
 
     <?= $form->field($model, 'tags')->textarea(['rows' => 6]) ?>
 

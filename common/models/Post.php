@@ -43,7 +43,7 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['title', 'content', 'status', 'author_id'], 'required'],
             [['content', 'tags'], 'string'],
-            [['status', 'create_time', 'userid', 'post_id', 'remind'], 'integer'],
+            [['status', 'create_time', 'update_time', 'author_id'], 'integer'],
             [['title'], 'string', 'max' => 128],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::class, 'targetAttribute' => ['author_id' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Poststatus::class, 'targetAttribute' => ['status' => 'id']],
