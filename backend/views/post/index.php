@@ -60,6 +60,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'pager' => [
+            'maxButtonCount' => 10,
+            'linkContainerOptions' => ['class' => 'page-item'],
+            'linkOptions' => ['class' => 'page-link'],
+            'disabledListItemSubTagOptions' => ['tag' => 'a', 'class' => 'page-link', 'aria-disabled' => 'true'],
+            'nextPageLabel' => Yii::t('app', '下一页'),
+            'prevPageLabel' => Yii::t('app', '上一页'),
+            'nextPageCssClass' => 'page-item',
+            'prevPageCssClass' => 'page-item',
+            'disableCurrentPageButton' => true,
+        ],
     ]); ?>
 
 
