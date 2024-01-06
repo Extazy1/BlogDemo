@@ -67,8 +67,8 @@ $this->params['breadcrumbs'][] = $this->title;
                               </svg>',$url,$options);
             				},
             				
-    ],
-    ],
+                    ],
+            ],
         ],
     ]); ?>
 
