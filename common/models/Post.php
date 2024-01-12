@@ -50,6 +50,8 @@ class Post extends \yii\db\ActiveRecord
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::class, 'targetAttribute' => ['author_id' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Poststatus::class, 'targetAttribute' => ['status' => 'id']],
             [['attachment'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, pdf, doc, docx', 'maxFiles' => 10], // 允许多文件上传
+            [['category_id'], 'required'],
+            [['category_id'], 'integer'],
         ];
     }
 
@@ -69,6 +71,7 @@ class Post extends \yii\db\ActiveRecord
             'author_id' => '作者',
             'remind' => '是否提醒',
             'attachment' => '附件',
+            'category_id' => '文章分类',
         ];
     }
 
@@ -98,6 +101,11 @@ class Post extends \yii\db\ActiveRecord
         ->where('status=:status',[':status'=>2])->orderBy('id DESC');
     }
 
+    public function getCategory()
+    {
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+    
     /**
      * Gets query for [[Status0]].
      *
@@ -128,7 +136,12 @@ class Post extends \yii\db\ActiveRecord
     
             // 将文件路径数组转换为JSON字符串
             $this->file_path = json_encode($filesPath);
-    
+            
+            // 确保 category_id 被正确设置
+            if ($this->category_id !== null) {
+                $this->category_id = intval($this->category_id);
+            }  
+
             return true;
         } else {
             return false;

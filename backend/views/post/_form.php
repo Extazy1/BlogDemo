@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Poststatus;
 use common\models\Adminuser;
+use common\models\Category;
 use dosamigos\ckeditor\CKEditor;
 
 /** @var yii\web\View $this */
@@ -31,7 +32,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"
     <div id="ckeditorContainer" style="display:none;">
         <?= $form->field($model, 'content')->widget(CKEditor::className(), [
             'options' => ['rows' => 6],
-            'preset' => 'basic'
+            'preset' => 'full'
         ]) ?>
     </div>
 
@@ -42,6 +43,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"
     
     <?= $form->field($model, 'attachment[]')->fileInput(['multiple' => true, 'id' => 'attachmentInput'])->label(false) ?>
     <?= $form->field($model, 'tags')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'category_id')->dropDownList(Category::getCategoryList(), ['prompt' => '请选择分类']); ?>
 
     <?= $form->field($model, 'status')->dropDownList(Poststatus::find()->select(['name','id'])->orderBy('position')->indexBy('id')->column(), ['prompt'=>'请选择状态']); ?>
     <?= $form->field($model, 'author_id')->dropDownList(Adminuser::find()->select(['nickname','id'])->indexBy('id')->column(), ['prompt'=>'请选择作者']); ?>
