@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "post".
@@ -26,6 +27,7 @@ use yii\helpers\HtmlPurifier;
 class Post extends \yii\db\ActiveRecord
 {
     private $_oldTags;
+    public $attachment;  // 用于处理上传的文件
 
     /**
      * {@inheritdoc}
@@ -47,6 +49,7 @@ class Post extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 128],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::class, 'targetAttribute' => ['author_id' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Poststatus::class, 'targetAttribute' => ['status' => 'id']],
+            [['attachment'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, pdf, doc, docx', 'maxFiles' => 10], // 允许多文件上传
         ];
     }
 
@@ -65,6 +68,7 @@ class Post extends \yii\db\ActiveRecord
             'update_time' => '修改时间',
             'author_id' => '作者',
             'remind' => '是否提醒',
+            'attachment' => '附件',
         ];
     }
 
@@ -106,26 +110,32 @@ class Post extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-    	if(parent::beforeSave($insert))
-    	{
-    		if($insert)
-    		{
-    			$this->create_time = time();
-    			$this->update_time = time();
-    		}
-    		else 
-    		{
-    			$this->update_time = time();
-    		}
-    		
-    		return true;
-    			
-    	}
-    	else 
-    	{
-    		return false;
-    	}
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->create_time = time();
+            }
+            $this->update_time = time();
+    
+            // 处理多文件上传
+            $this->attachment = UploadedFile::getInstances($this, 'attachment');
+            $filesPath = [];
+            foreach ($this->attachment as $file) {
+                $filePath = 'uploads/' . $file->baseName . '.' . $file->extension;
+                if ($file->saveAs($filePath)) {
+                    $filesPath[] = $filePath;
+                }
+            }
+    
+            // 将文件路径数组转换为JSON字符串
+            $this->file_path = json_encode($filesPath);
+    
+            return true;
+        } else {
+            return false;
+        }
     }
+    
+    
     
     public function getUrl()
     {

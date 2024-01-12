@@ -17,7 +17,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"
 
 <div class="post-form">
 
-    <?php $form = ActiveForm::begin(['id' => 'post-form']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'post-form'],['options' => ['enctype' => 'multipart/form-data']],); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -39,7 +39,8 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"
     <div id="markdownContainer" style="display:none;">
         <?= $form->field($model, 'content')->textarea(['id' => 'easyMDE']) ?>
     </div>
-
+    
+    <?= $form->field($model, 'attachment[]')->fileInput(['multiple' => true, 'id' => 'attachmentInput'])->label(false) ?>
     <?= $form->field($model, 'tags')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'status')->dropDownList(Poststatus::find()->select(['name','id'])->orderBy('position')->indexBy('id')->column(), ['prompt'=>'请选择状态']); ?>
@@ -55,6 +56,12 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"
 
 <?php
 $this->registerJs("
+document.getElementById('attachmentInput').addEventListener('change', function() {
+    var fileName = this.files[0].name; // 获取选择的文件名
+    // 将文件名显示在输入框下面。这里假设您有一个id为'filenameDisplay'的元素用来显示文件名。
+    document.getElementById('post-attachment').textContent = fileName;
+});
+
 var easyMDE;
 
 document.getElementById('useCkEditor').addEventListener('click', function() {
