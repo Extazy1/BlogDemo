@@ -10,6 +10,7 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use frontend\components\TagsCloudWidget;
 use frontend\components\RctReplyWidget;
+use frontend\components\AttachmentsWidget;
 use yii\caching\DbDependency;
 use yii\caching\yii\caching;
 use yii\widgets\ListView;
@@ -44,9 +45,15 @@ $this->title = $model->title;
                 </div>
             </div>
 
+            <!-- 内容区域 -->
             <div class="content">
                 <?php echo $model->content;?>
             </div> 
+
+            <!-- 附件区域 -->
+            <div class="card-text content mt-3">
+                <?= AttachmentsWidget::widget(['postId' => $model->id]) ?>
+            </div>
 
             <br>
             <div class="nav" >
