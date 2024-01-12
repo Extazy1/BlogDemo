@@ -162,6 +162,23 @@ class Post extends \yii\db\ActiveRecord
         return HtmlPurifier::process($this->content);
     }
 
+    /**
+     * 返回附件文件名列表
+     */
+    public function getAttachmentList()
+    {
+        $attachments = json_decode($this->file_path);
+        $attachmentList = [];
+
+        if (is_array($attachments)) {
+            foreach ($attachments as $attachment) {
+                $attachmentList[] = basename($attachment);
+            }
+        }
+
+        return $attachmentList;
+    }
+
     public function  getTagLinks()
     {
     	$links=array();
