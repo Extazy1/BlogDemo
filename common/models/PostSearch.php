@@ -11,6 +11,8 @@ use common\models\Post;
  */
 class PostSearch extends Post
 {
+    public $category_id;
+
     public function attributes()
 	{
 		return array_merge(parent::attributes(),['authorName']);
@@ -48,7 +50,10 @@ class PostSearch extends Post
         $query = Post::find();
 
         // add conditions that should always apply here
-
+        if (isset($params['PostSearch']['category_id'])) {
+            $query->andWhere(['category_id' => $params['PostSearch']['category_id']]);
+        }
+        
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         	'pagination' => ['pageSize'=>10],

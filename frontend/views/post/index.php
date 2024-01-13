@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use frontend\components\CategoryWidget;
 use frontend\components\TagsCloudWidget;
 use frontend\components\RctReplyWidget;
 use yii\caching\DbDependency;
@@ -20,8 +21,20 @@ $this->title = '文章列表';
 <div class="container">
 
 <div class="row">
+	<!-- 左侧侧边栏 -->
+	<div class="col-md-1" id="category-sidebar">
+    	<button id="toggle-category" class="btn btn-primary mb-2">文章分类</button>
+    	<div id="category-box">
+        	<ul class="list-group">
+				<!-- 循环输出分类列表 -->
+				<li class="list-group-item">
+					<?= CategoryWidget::widget(['categories' => $categories]) ?>
+				</li>
+			</ul>
+		</div>
+	</div>
 
-	<div class="col-md-9">
+	<div class="col-md-8" id="main-content">
 
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
@@ -51,7 +64,7 @@ $this->title = '文章列表';
 
 	</div>
 
-	<div class="col-md-3">
+	<div class="col-md-3" id="right-sidebar">
 
 		<div class="searchbox">
 			<ul class="list-group">
@@ -95,3 +108,34 @@ $this->title = '文章列表';
 </div>
 
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var toggleButton = document.getElementById('toggle-category');
+    var categorySidebar = document.getElementById('category-sidebar');
+    var mainContent = document.getElementById('main-content');
+    var rightSidebar = document.getElementById('right-sidebar');
+
+    toggleButton.addEventListener('click', function() {
+        var isCategoryBoxVisible = categorySidebar.style.display !== 'none';
+        
+        if (isCategoryBoxVisible) {
+            // 隐藏分类列表
+            categorySidebar.style.display = 'none';
+            // 调整主内容区域的宽度
+            mainContent.className = 'col-md-9';
+            // 调整右侧边栏的宽度
+            rightSidebar.className = 'col-md-3';
+        } else {
+            // 显示分类列表
+            categorySidebar.style.display = 'block';
+			categorySidebar.className = 'col-md-1';
+            // 还原主内容区域的宽度
+            mainContent.className = 'col-md-8';
+            // 还原右侧边栏的宽度
+            rightSidebar.className = 'col-md-3';
+        }
+    });
+});
+</script>
+

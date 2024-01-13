@@ -2,10 +2,12 @@
 
 namespace backend\controllers;
 
+use Yii;
 use common\models\Comment;
 use common\models\CommentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -38,6 +40,9 @@ class CommentController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('approveComment')) {
+            throw new ForbiddenHttpException("对不起，你没有进行该操作的权限。");
+        }
         $searchModel = new CommentSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 

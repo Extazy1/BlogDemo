@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Tag;
 use common\models\User;
+use common\models\Category;
 use common\models\Comment;
 use common\models\Post;
 use common\models\PostSearch;
@@ -98,12 +99,14 @@ class PostController extends Controller
 
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $categories = Category::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'tags' => $tags,
             'recentComments' => $recentComments,
+            'categories' => $categories,
         ]);
     }
 

@@ -45,4 +45,15 @@ class Category extends ActiveRecord
         $categories = self::find()->all();
         return \yii\helpers\ArrayHelper::map($categories, 'id', 'name');
     }
+
+    /**
+     * 根据名称查找分类
+     *
+     * @param string $name 分类名称
+     * @return Category|null 返回与名称匹配的分类对象，如果没有找到则返回 null
+     */
+    public static function findByName($name)
+    {
+        return self::findOne(['name' => $name]);
+    }
 }
