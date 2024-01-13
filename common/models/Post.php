@@ -180,6 +180,11 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getAttachmentList()
     {
+        // 首先检查 $this->file_path 是否为空
+        if (empty($this->file_path)) {
+            return []; // 如果为空，直接返回空数组
+        }
+
         $attachments = json_decode($this->file_path);
         $attachmentList = [];
 

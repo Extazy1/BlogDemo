@@ -11,6 +11,7 @@ use yii\grid\GridView;
 use frontend\components\TagsCloudWidget;
 use frontend\components\RctReplyWidget;
 use frontend\components\AttachmentsWidget;
+use frontend\components\HtmlContentWidget;
 use yii\caching\DbDependency;
 use yii\caching\yii\caching;
 use yii\widgets\ListView;
@@ -47,8 +48,8 @@ $this->title = $model->title;
 
             <!-- 内容区域 -->
             <div class="content">
-                <?php echo $model->content;?>
-            </div> 
+                <?= HtmlContentWidget::widget(['content' => $model->content]) ?>
+            </div>
 
             <!-- 附件区域 -->
             <div class="card-text content mt-3">
