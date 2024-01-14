@@ -21,7 +21,7 @@ class CategoryWidget extends Widget
         foreach ($this->categories as $category)
         {
             $url = Yii::$app->urlManager->createUrl(['post/index', 'PostSearch[category_id]' => $category->id], ['style' => 'text-decoration: none;']);
-            $categoryString .= '<a href="' . $url . '"style="text-decoration: none;">' . Html::encode($category->name) . '</a> ';
+            $categoryString .= '<a href="' . $url . '"style="text-decoration: none;">' . Html::encode($category->name) . '</a><br /> ';
         }
 
         return $categoryString;

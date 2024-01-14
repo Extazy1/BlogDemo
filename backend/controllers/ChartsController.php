@@ -161,30 +161,36 @@ class ChartsController extends Controller
                 'graphic' => [
                     'elements' => [
                             // 这里根据实际情况添加图像元素
-                            // 示例：第一张图片
                             [
                                 'type' => 'image',
                                 'style' => [
-                                    'image' => 'https://www.example.com/image1.jpg',
+                                    'image' => 'https://tse1-mm.cn.bing.net/th/id/OIP-C.8Q17_TCLayXr3xf4qMH5oAHaEU?rs=1&pid=ImgDetMain',
                                     'width' => 600,
                                     'height' => 400
                                 ],
                                 'left' => 'center',
                                 'top' => 'middle'
                             ],
-                            // 继续添加更多图片元素（如果需要）
-                            // 示例：第二张图片
                             [
                                 'type' => 'image',
                                 'style' => [
-                                    'image' => 'https://www.example.com/image2.jpg',
+                                    'image' => 'https://pic2.zhimg.com/v2-282e4046cae1a77c72adbc260a95c61e_b.jpg',
                                     'width' => 600,
                                     'height' => 400
                                 ],
                                 'left' => 'center',
                                 'top' => 'middle'
                             ],
-                            // 更多图片...
+                            [
+                                'type' => 'image',
+                                'style' => [
+                                    'image' => 'https://tse2-mm.cn.bing.net/th/id/OIP-C.8T-A0VXHyVMpArtaF1r7TgHaDy?rs=1&pid=ImgDetMain',
+                                    'width' => 600,
+                                    'height' => 400
+                                ],
+                                'left' => 'center',
+                                'top' => 'middle'
+                            ],
                         ]
                     ]
                 ],

@@ -33,9 +33,10 @@ $this->registerJs(
     <div class="row">
         <!-- 侧边栏 -->
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="position-sticky pt-3">
+            <div class="position-sticky pt-5" style="top: 0;">
                 <h1 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span style="font-size : 1.5ex;">仪表盘</span>                </h1>
+                    <span style="font-size : 1.5ex;">仪表盘</span>
+                </h1>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">
@@ -184,7 +185,32 @@ $this->registerJs(
                 相册图
             </div>
             <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
-                <div id="carousel-chart" style="width: 600px; height: 400px; margin: auto;"></div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.8Q17_TCLayXr3xf4qMH5oAHaEU?rs=1&pid=ImgDetMain" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://pic2.zhimg.com/v2-282e4046cae1a77c72adbc260a95c61e_b.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.8T-A0VXHyVMpArtaF1r7TgHaDy?rs=1&pid=ImgDetMain" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -204,8 +230,8 @@ myChart.setOption(chartConfig.areaChartOptions);
 var pieChart = echarts.init(document.getElementById('pie-chart'));
 pieChart.setOption(chartConfig.pieChartOptions);
 
-var carouselChart = echarts.init(document.getElementById('carousel-chart'));
-carouselChart.setOption(chartConfig.carouselOptions);
+//var carouselChart = echarts.init(document.getElementById('carousel-chart'));
+//carouselChart.setOption(chartConfig.carouselOptions);
 JS;
 
 $this->registerJs($js, \yii\web\View::POS_READY);
