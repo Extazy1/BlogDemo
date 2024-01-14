@@ -1,0 +1,34 @@
+.stats-increase {
+    background-color: #d4edda; /* 浅绿色背景 */
+    color: #155724; /* 深绿色文字 */
+    border-radius: 0.25rem; /* 轻微的圆角 */
+    padding: 0.25rem 0.5rem; /* 内边距 */
+    display: inline-flex; /* 使项内联显示并允许弹性盒布局 */
+    align-items: center; /* 垂直居中图标和文字 */
+    font-size: 0.875rem; /* 调整字体大小 */
+}
+
+.stats-increase i {
+    font-size: 1.25rem; /* 图标的大小 */
+    line-height: 1; /* 图标行高，用于垂直对齐 */
+    color: #28a745; /* 图标颜色 */
+    margin-right: 0.25rem; /* 在图标和文字之间添加间距 */
+}
+
+.stats-decrease {
+    background-color: #f8d7da; /* 浅红色背景 */
+    color: #721c24; /* 深红色文字 */
+    border-radius: 0.25rem; /* 轻微的圆角 */
+    padding: 0.25rem 0.5rem; /* 内边距 */
+    display: inline-flex; /* 使项内联显示并允许弹性盒布局 */
+    align-items: center; /* 垂直居中图标和文字 */
+    font-size: 0.875rem; /* 调整字体大小 */
+}
+
+.stats-decrease i {
+    font-size: 1.25rem; /* 图标的大小 */
+    line-height: 1; /* 图标行高，用于垂直对齐 */
+    color: #d9534f; /* 图标颜色，这里使用的是 Bootstrap 的警告颜色 */
+    margin-right: 0.25rem; /* 在图标和文字之间添加间距 */
+}
+

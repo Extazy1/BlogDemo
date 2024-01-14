@@ -42,7 +42,7 @@ AppAsset::register($this);
         '<li><span class="badge bg-warning">'.Comment::getPengdingCommentCount().'</span></li>',
         ['label' => '用户管理', 'url' => ['/user/index']],
         ['label' => '管理员', 'url' => ['/adminuser/index']],
-        ['label' => '数据统计', 'url' => ['/charts/index']]
+        ['label' => '仪表盘', 'url' => ['/charts/index']]
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
