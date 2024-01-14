@@ -48,6 +48,8 @@ return [
             	'<controller:(post|comment)>s'=>'<controller>/index',
             	'<controller:\w+>/<id:\d+>'=>'<controller>/view',
             	'<controller:\w+>/<id:\d+>/<action:(create|update|delete)>'=>'<controller>/<action>',
+                // 添加 RSS Feed 路由
+                'rss' => 'site/rss',
             ],
         ],
     ],

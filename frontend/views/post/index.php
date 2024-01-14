@@ -32,6 +32,13 @@ $this->title = '文章列表';
 				</li>
 			</ul>
 		</div>
+		<div id="rss">
+			<!-- RSS 订阅图标链接 -->
+			<a href="http://backend.test/rss.html" target="_blank" title="订阅 RSS">
+				<img src="https://ts1.cn.mm.bing.net/th/id/R-C.836829e6642b0f4920dc56143112fe03?rik=erdNdDZgJEe84Q&riu=http%3a%2f%2fwww.ranklogos.com%2fwp-content%2fuploads%2f2012%2f04%2fRSS-logo.png&ehk=bH7ZQE7aEOGgCH28o3U5jkJj5Uz9jGl08sWFGKj%2fK3U%3d&risl=&pid=ImgRaw&r=0" \
+				alt="RSS" class="rss-icon" style="width:64px; height:64px; margin-top: 10px;">
+			</a>
+		</div>
 	</div>
 
 	<div class="col-md-8" id="main-content">
