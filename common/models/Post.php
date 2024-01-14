@@ -197,15 +197,18 @@ class Post extends \yii\db\ActiveRecord
         return $attachmentList;
     }
 
-    public function  getTagLinks()
+    public function getTagLinks()
     {
-    	$links=array();
-    	foreach(Tag::string2array($this->tags) as $tag)
-    	{
-    		$links[]=Html::a(Html::encode($tag),array('post/index','PostSearch[tags]'=>$tag));
-    	}
-    	return $links;
-    }
+        $links = [];
+        foreach (Tag::string2array($this->tags) as $tag) {
+            $links[] = Html::a(
+                Html::encode($tag),
+                ['post/index', 'PostSearch[tags]' => $tag],
+                ['style' => 'text-decoration: none;'] // 添加 style 属性
+            );
+        }
+        return $links;
+    }    
 
     public function getCommentCount()
     {

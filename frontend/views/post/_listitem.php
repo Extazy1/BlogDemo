@@ -35,7 +35,8 @@ BootstrapAsset::register($this);
 
         <!-- 评论和修改信息区域 -->
         <div class="card-footer mt-2 text-end">
-            <?= Html::a("评论 ({$model->commentCount})", $model->url.'#comments', ['class' => 'text-decoration-none']); ?> | 最后修改于 <?= date('Y-m-d H:i:s', $model->update_time); ?>
+            <?= Html::a("评论 ({$model->commentCount})", $model->url.'#comments', ['class' => 'text-decoration-none']); ?> 
+            | 最后修改于 <?= date('Y-m-d H:i:s', $model->update_time); ?>
         </div>
     </div>
 </div>
